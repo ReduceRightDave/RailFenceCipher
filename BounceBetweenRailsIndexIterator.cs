@@ -1,6 +1,6 @@
 ﻿internal class BounceBetweenRailsIndexIterator
 {
-    private int _nextIndex = -1;
+    private int nextIndex = -1;
     private bool isInreasingIndex = true;
     private readonly int numberOfRails;
 
@@ -12,24 +12,24 @@
         {
             if (isInreasingIndex)
             {
-                _nextIndex++;
+                nextIndex++;
             }
             else
             {
-                _nextIndex--;
+                nextIndex--;
             }
 
-            if (_nextIndex == numberOfRails)
+            if (nextIndex == numberOfRails)
             {
                 isInreasingIndex = !isInreasingIndex;
-                _nextIndex = numberOfRails - 2;
+                nextIndex = numberOfRails - 2;
             }
-            if (_nextIndex == -1)
+            if (nextIndex == -1)
             {
                 isInreasingIndex = !isInreasingIndex;
-                _nextIndex = 1;
+                nextIndex = 1;
             }
-            return _nextIndex;
+            return nextIndex;
         }
     }
 }
