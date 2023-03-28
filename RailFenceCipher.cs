@@ -20,17 +20,18 @@ public class RailFenceCipher
         return string.Join(string.Empty, rails);
     }
 
-    private int[] calculateCharCountForEachRail(int encodedStringLength)
+    public string Decode(string input)
     {
-        int[] charCountForEachRail = new int[numberOfrails];
+        string result = ""; //TODO string builder
+        StringWithCharIterator[] encodedRails = generateEncodedRails(input);
         BounceBetweenRailsIndexIterator railsIterator = new BounceBetweenRailsIndexIterator(numberOfrails);
 
-        for (var i = 0; i < encodedStringLength; i++)
+        for (var i = 0; i < input.Length; i++)
         {
-            charCountForEachRail[railsIterator.next] += 1;
+            result += encodedRails[railsIterator.next].nextChar;
         }
 
-        return charCountForEachRail;
+        return result;
     }
 
     private StringWithCharIterator[] generateEncodedRails(string encodedInput)
@@ -48,17 +49,16 @@ public class RailFenceCipher
         return rails;
     }
 
-    public string Decode(string input)
+    private int[] calculateCharCountForEachRail(int encodedStringLength)
     {
-        string result = ""; //TODO string builder
-        StringWithCharIterator[] encodedRails = generateEncodedRails(input);
+        int[] charCountForEachRail = new int[numberOfrails];
         BounceBetweenRailsIndexIterator railsIterator = new BounceBetweenRailsIndexIterator(numberOfrails);
 
-        for (var i = 0; i < input.Length; i++)
+        for (var i = 0; i < encodedStringLength; i++)
         {
-            result += encodedRails[railsIterator.next].nextChar;
+            charCountForEachRail[railsIterator.next] += 1;
         }
 
-        return result;
+        return charCountForEachRail;
     }
 }
